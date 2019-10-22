@@ -5,66 +5,12 @@
 """An easy-to-play console yahtzee game."""
 
 import random
+from utils import *
 
 # List contains scores of each player. first index is always human, the rest refer to number of NPC's.
 scores = []
 # List contains the order of players. first is always human, the rest refer to number of NPC's.
 order = []
-
-
-def pluralize(term, should, apostrophe=True):
-	"""Minimalistic function to pluralize a term, if necessary.
-	Only adds "s" to term if should is True."""
-	if should:
-		if apostrophe:
-			return term + "'s"
-		else:
-			return term + "s"
-	else:
-		return term
-
-
-def menu(prompt, items):
-	"""Constructs and shows a simple commandline menu.
-	Returns the user input."""
-	for i in range(len(items)):
-		print(str(i+1) + ": " + items[i])
-	result = None
-	while True:
-		result = input(prompt)
-		if result:
-			break
-	return result
-
-
-def roll(dice):
-	"""Rolls dice number of 6-sided dice"""
-	rolls = []
-	for i in range(dice):
-		rolls.append(random.randint(1, 6))
-	return rolls
-
-
-def who(i):
-	"""Returns the name of an NPC if i>0, otherwise you"""
-	if i == 0:
-		return "you"
-	else:
-		return "NPC " + str(i)
-
-
-def turn_order(rolls):
-	"""given a list of roll sums, returns a list of turn order.
-	Turn order is in the form of indexes, where 0=player and everything >0 is NPC's"""
-	order = []
-	while len(order) < len(rolls):
-		maximum = max(rolls)
-		index = rolls.index(maximum)
-		# Remove this maximum from rolls, otherwise every iteration will return the same one
-		# I need caffeination
-		rolls[index] = -1  # We shouldn't run into it again.
-		order.append(index)
-	return order
 
 
 def go():
@@ -90,6 +36,7 @@ def go():
 			while len(saved_dice)<5:
 				# We need each roll as a string for display
 				items = [str(i) for i in current_roll]
+				items.append("reroll all")
 				items.append("done")
 				result = menu("Choose the dice to keep", items)
 				#Optionally allow input such as 2 4 to select dice 2 and 4
