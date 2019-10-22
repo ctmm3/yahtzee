@@ -1,0 +1,43 @@
+#!/usr/bin/python3
+#Noel and Carter
+#22 October 2019
+
+"""
+Our last file with our user stories was accidentally deleted.
+This is a remake. 
+
+Main Story::
+
+    - As a yahtzee player, I would like a computerized yahtzee game, so I can play against the computer anytime. 
+   
+   
+   
+Split Stories::
+
+X   - As a yahtzee player, I would like the computer to decide who goes first, so we can start to play.
+    
+X   - As a yahtzee player, I would like to be able to roll 5 six-sided dice on my turn, so I can begin earning points.
+    
+X   - As a yahtzee player, I would like to be able to select dice to keep before re-rolling, so I can stradegize to earn the maximum points. 
+    
+X   - As a yahtzee player, I would like to be able to re-roll the dice I don't want two times, so I can get new numbers.
+    
+X   - As a yahtzee player, I would like to be able to complete my turn before using all three rolls if I want to, so I can keep all five dice earlier.
+    
+X   - As a yahtzee player, I would like to be able to re-roll all my available dice on any turn, so I don't have to save any I don't want. 
+    
+X   - As a yahtzee player, I would like to be able to see where I can score, so I can decide how to get my points. 
+    
+X   - As a yahtzee player, I would like to be able to decide where I want my points and have the computer determine how many points I'll get, so my score stays accurate.
+
+    - As a yahtzee player, I would like the computer to be able to take a turn without my input, so they can play.
+    
+    - As a yahtzee player, I would like to be able to watch the computer's turn, so I know what happened ( and can trust the score ).
+    
+    - As a yahtzee player, I would like to be able to see my score compared to the computer's score after every turn, so I know who's winning. 
+    
+"""
+
+#X = Done
+   
+   
