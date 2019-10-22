@@ -6,19 +6,19 @@
 
 #Tuple containing possible score categories
 categories = (
-	"ones",
-	"twos",
-	"threes",
-	"fours",
-	"fives",
-	"sixes",
-	"three of a kind",
-	"four of a kind",
-	"full house",
-	"small straight",
-	"large straight",
-	"chance",
-	"yahtzee",
+	"One's",
+	"Two's",
+	"Three's",
+	"Four's",
+	"Five's",
+	"Six's",
+	"Three of a Kind",
+	"Four of a Kind",
+	"Full House",
+	"Small Straight",
+	"Large Straight",
+	"Chance",
+	"Yahtzee!",
 )
 
 from utils import *
