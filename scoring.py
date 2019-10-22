@@ -25,7 +25,7 @@ from utils import *
 
 def usr_scores(lst):
 	this_turn = 0
-	category = menu_choice("Choose the category you would like to use", categories)
+	category = menu_choice("Choose the category you would like to use: ", categories)
 	category += 1
 
 	if category == 1:
