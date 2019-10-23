@@ -4,23 +4,6 @@
 
 """This module handles processing of scores in accordence with yahtzee rules"""
 
-#Tuple containing possible score categories
-categories = (
-	"One's",
-	"Two's",
-	"Three's",
-	"Four's",
-	"Five's",
-	"Six's",
-	"Three of a Kind",
-	"Four of a Kind",
-	"Full House",
-	"Small Straight",
-	"Large Straight",
-	"Chance",
-	"Yahtzee!",
-)
-
 from utils import *
 
 def usr_scores(lst):
@@ -291,3 +274,20 @@ if __name__ == "__main__":
 	print("Your final dice are:", rolls)
 	rolls.sort()
 	print("The score you earned this turn is: ",usr_scores(rolls))
+
+#tuple containing mapping of possible score categories to their corresponding functions
+categories = (
+	("One's", ones),
+	("Two's", twos),
+	("Three's", threes),
+	("Four's", fours),
+	("Five's", fives),
+	("Six's", sixs),
+	("Three of a Kind", threeK),
+	("Four of a Kind", fourK),
+	("Full House", fh),
+	("Small Straight", smst),
+	("Large Straight", lgst),
+	("Chance", chance),
+	("Yahtzee!", yahtzee)
+)

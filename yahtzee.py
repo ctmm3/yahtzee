@@ -1,3 +1,11 @@
+"""
+We are going to do things.
+Move all logic specific to handling of players into one statement.
+Order all NPC logic below.
+Keep relevant portions.
+Noel codes this part because I don't want to. #TooHard #NotToday
+"""
+
 #!/usr/bin/python
 # Wednesday, October 16, 2019
 # Carter and Noel
@@ -21,54 +29,52 @@ def go():
 	while True:
 		w = who(current_player)
 		# You roll or they roll?
-		if current_player==0:
+		if not is_npc(current_player):
 			pronoun = "you"
-		else:
-			pronoun = "they"
-		if current_player==0:
 			print("It's your turn")
 		else:
+			pronoun = "they"
 			print("It's "+w+"'s turn")
 		current_roll = roll(5)
 		saved_dice = []
 		num_rolls = 1
 		print(pronoun+" roll 5 dice.")
 		print(", ".join([str(i) for i in current_roll]))
-		if current_player==0:
-			#We should only be able to roll 3 times, max
-			while num_rolls<4:
-				# We need each roll as a string for display
-				items = [str(i) for i in current_roll]
-				items.append("reroll all")
-				items.append("done")
+		#We should only be able to roll 3 times, max
+		while num_rolls<4:
+			# We need each roll as a string for display
+			items = [str(i) for i in current_roll]
+			items.append("reroll all")
+			items.append("done")
+			if not is_npc(current_player):
 				result = menu("Choose the dice to keep", items)
 				#Optionally allow input such as 2 4 to select dice 2 and 4
 				spl = result.split(" ")
 				#Convert each item in list to an int for simplified processing
 				for i in range(len(spl)):
 					spl[i] = int(spl[i])
-				if len(items)-1 in spl:
-					#Done
-					print("done")
-					break
-				elif len(items)-2 in spl:
-					#Re-roll
-					if num_rolls == 3:
-						print("You can't re-roll any more")
-					else:
-						print("re-rolling")
-						current_roll = roll(5-len(saved_dice))
-						num_rolls += 1
-						continue
-				for item in spl:
-					saved_dice.append(current_roll[item])
-				current_roll = roll(5-len(saved_dice))
-				num_rolls += 1
-			turn_score = scoring.usr_scores(saved_dice)
-			scores[current_player] += turn_score
-			print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
-		else:
-			print("I'm doing stuff right now")
+			#else statement to program npc
+			#put everything in there for computer only
+			if len(items)-1 in spl:
+				#Done
+				print("done")
+				break
+			elif len(items)-2 in spl:
+				#Re-roll
+				if num_rolls == 3:
+					print("You can't re-roll any more")
+				else:
+					print("re-rolling")
+					current_roll = roll(5-len(saved_dice))
+					num_rolls += 1
+					continue
+			for item in spl:
+				saved_dice.append(current_roll[item])
+			current_roll = roll(5-len(saved_dice))
+			num_rolls += 1
+		turn_score = scoring.usr_scores(saved_dice)
+		scores[current_player] += turn_score
+		print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
 		#cycle order
 		#If we reach the end of our list of players, wrap around
 		index = order.index(current_player)
