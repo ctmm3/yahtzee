@@ -75,5 +75,3 @@ def turn_order(rolls):
 		rolls[index] = -1  # We shouldn't run into it again.
 		order.append(index)
 	return order
-
-

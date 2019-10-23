@@ -5,6 +5,7 @@
 """An easy-to-play console yahtzee game."""
 
 import random
+import scoring
 from utils import *
 
 # List contains scores of each player. first index is always human, the rest refer to number of NPC's.
@@ -30,10 +31,12 @@ def go():
 			print("It's "+w+"'s turn")
 		current_roll = roll(5)
 		saved_dice = []
+		num_rolls = 1
 		print(pronoun+" roll 5 dice.")
 		print(", ".join([str(i) for i in current_roll]))
 		if current_player==0:
-			while len(saved_dice)<5:
+			#We should only be able to roll 3 times, max
+			while num_rolls<4:
 				# We need each roll as a string for display
 				items = [str(i) for i in current_roll]
 				items.append("reroll all")
@@ -41,10 +44,34 @@ def go():
 				result = menu("Choose the dice to keep", items)
 				#Optionally allow input such as 2 4 to select dice 2 and 4
 				spl = result.split(" ")
+				#Convert each item in list to an int for simplified processing
+				for i in range(len(spl)):
+					spl[i] = int(spl[i])
+				reroll = False
+				done = False
+				if len(items) in spl:
+					done = True
+					spl.remove(len(items))
+				if len(items)-1 in spl:
+					reroll = True
+					spl.remove(len(items)-1)
 				for item in spl:
-					if item.isnumeric():
-						saved_dice.append(item)
+					saved_dice.append(current_roll[item])
+				if reroll:
+					if num_rolls == 3:
+						print("You can't re-roll any more")
+					else:
+						print("re-rolling")
+						current_roll = roll(5-len(saved_dice))
+				if done:
+					print("done")
+					break
 				current_roll = roll(5-len(saved_dice))
+				num_rolls += 1
+			print(saved_dice)
+			turn_score = scoring.usr_scores(saved_dice)
+			scores[current_player] += turn_score
+			print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
 		else:
 			print("I'm doing stuff right now")
 		#cycle order
@@ -80,4 +107,6 @@ if __name__ == "__main__":
 	order = turn_order(summed_rolls)
 	print("the turn order is as follows")
 	print(", ".join([who(i) for i in order]))
+	#Initialize the score list with slots
+	scores = [0] * len(order)
 	go()
