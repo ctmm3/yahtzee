@@ -131,7 +131,7 @@ def threeK(lst):
 		return sum(lst)
 	elif lst.count(6) == 3:
 		return sum(lst)
-	else:Your roll is
+	else:
 		return 0
 
 
