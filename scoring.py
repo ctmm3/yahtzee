@@ -290,4 +290,4 @@ if __name__ == "__main__":
 	rolls = [3, 4, 5, 6, 1]
 	print("Your final dice are:", rolls)
 	rolls.sort()
-	print("The score you earned this turn is: ",usr_scores(rolls))
+	print("The score you earned this turn is: ", usr_scores(rolls))
