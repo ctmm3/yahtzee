@@ -22,7 +22,7 @@ def menu(prompt, items):
 	"""Constructs and shows a simple commandline menu.
 	Returns the user input."""
 	for i in range(len(items)):
-		print(str(i+1) + ": " + items[i])
+		print(str(i) + ": " + items[i])
 	result = None
 	while True:
 		result = input(prompt)

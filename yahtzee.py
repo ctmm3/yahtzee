@@ -47,28 +47,23 @@ def go():
 				#Convert each item in list to an int for simplified processing
 				for i in range(len(spl)):
 					spl[i] = int(spl[i])
-				reroll = False
-				done = False
-				if len(items) in spl:
-					done = True
-					spl.remove(len(items))
 				if len(items)-1 in spl:
-					reroll = True
-					spl.remove(len(items)-1)
-				for item in spl:
-					saved_dice.append(current_roll[item])
-				if reroll:
+					#Done
+					print("done")
+					break
+				elif len(items)-2 in spl:
+					#Re-roll
 					if num_rolls == 3:
 						print("You can't re-roll any more")
 					else:
 						print("re-rolling")
 						current_roll = roll(5-len(saved_dice))
-				if done:
-					print("done")
-					break
+						num_rolls += 1
+						continue
+				for item in spl:
+					saved_dice.append(current_roll[item])
 				current_roll = roll(5-len(saved_dice))
 				num_rolls += 1
-			print(saved_dice)
 			turn_score = scoring.usr_scores(saved_dice)
 			scores[current_player] += turn_score
 			print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
