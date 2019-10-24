@@ -78,3 +78,9 @@ def turn_order(rolls):
 
 def is_npc(current_player):
 	return current_player!=0
+
+def remove_all(lst, item):
+	for i in list(lst):
+		if i == item:
+			lst.remove(item)
+	return lst
