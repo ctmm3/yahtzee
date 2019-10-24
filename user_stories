@@ -17,6 +17,8 @@ Split Stories::
 X   - As a yahtzee player, I would like the computer to decide who goes first, so we can start to play.
     
 X   - As a yahtzee player, I would like to be able to roll 5 six-sided dice on my turn, so I can begin earning points.
+
+As a yahtzee player, I would like to see the dice I rolled in numerical order, so I can be better able to map out my score.
     
 X   - As a yahtzee player, I would like to be able to select dice to keep before re-rolling, so I can stradegize to 
       earn the maximum points. 
