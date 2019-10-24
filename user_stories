@@ -21,13 +21,10 @@ X   - As a yahtzee player, I would like to be able to roll 5 six-sided dice on m
 X   - As a yahtzee player, I would like to be able to select dice to keep before re-rolling, so I can stradegize to 
       earn the maximum points. 
     
-    - As a yahtzee player, I would like to be able to re-roll the dice I don't want two times, so I can get new numbers.
+X   - As a yahtzee player, I would like to be able to re-roll the dice I don't want two times, so I can get new numbers.
     
     - As a yahtzee player, I would like to be able to complete my turn before using all three rolls if I want to, so I 
       can keep all five dice earlier.
-    
-    - As a yahtzee player, I would like to be able to re-roll all my available dice on any turn, so I don't have to save 
-      any I don't want. 
     
 X   - As a yahtzee player, I would like to be able to see where I can score, so I can decide how to get my points. 
     

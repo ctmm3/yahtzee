@@ -53,8 +53,10 @@ def go():
 				#Convert each item in list to an int for simplified processing
 				for i in range(len(spl)):
 					spl[i] = int(spl[i])
-			#else statement to program npc
-			#put everything in there for computer only
+				#else statement to program npc
+				else:
+					
+			
 			if len(items)-1 in spl:
 				#Done
 				print("done")
