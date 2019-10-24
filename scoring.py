@@ -8,7 +8,10 @@ from utils import *
 
 def usr_scores(lst):
 	this_turn = 0
-	category = menu_choice("How would you like to score these dice?", categories)
+	names = []
+	for i, j in categories:
+		names.append(i)
+	category = menu_choice("How would you like to score these dice?", names)
 	category += 1
 
 	if category == 1:
@@ -268,13 +271,6 @@ def yahtzee(lst):
 		return 0
 
 
-if __name__ == "__main__":
-	print("Let's do a practice roll!")
-	rolls = [3, 4, 5, 6, 1]
-	print("Your final dice are:", rolls)
-	rolls.sort()
-	print("The score you earned this turn is: ",usr_scores(rolls))
-
 #tuple containing mapping of possible score categories to their corresponding functions
 categories = (
 	("One's", ones),
@@ -291,3 +287,10 @@ categories = (
 	("Chance", chance),
 	("Yahtzee!", yahtzee)
 )
+
+if __name__ == "__main__":
+	print("Let's do a practice roll!")
+	rolls = [3, 4, 5, 6, 1]
+	print("Your final dice are:", rolls)
+	rolls.sort()
+	print("The score you earned this turn is:", usr_scores(rolls))
