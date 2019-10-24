@@ -53,11 +53,14 @@ def go():
 				#Convert each item in list to an int for simplified processing
 				for i in range(len(spl)):
 					spl[i] = int(spl[i])
-				#else statement to program npc
-				else:
-					category = best_category(lst)
-					name = category.__name__
-					if name == "yahtzee":					
+			#else statement to program npc
+			else:
+				category = scoring.best_category(lst)
+				name = category.__name__
+				if name == "yahtzee":
+					print("The computer got a Yahtzee!")
+					print("Their score this turn is 50!")
+						
 			
 			if len(items)-1 in spl:
 				#Done
