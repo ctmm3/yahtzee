@@ -38,15 +38,16 @@ def go():
 		current_roll = roll(5)
 		saved_dice = []
 		num_rolls = 1
+		turn_score = 0
 		print(pronoun+" roll 5 dice.")
 		print(", ".join([str(i) for i in current_roll]))
 		#We should only be able to roll 3 times, max
 		while num_rolls<4:
 			# We need each roll as a string for display
 			items = [str(i) for i in current_roll]
-			items.append("reroll all")
-			items.append("done")
 			if not is_npc(current_player):
+				items.append("reroll all")
+				items.append("done")				
 				result = menu("Choose the dice to keep", items)
 				#Optionally allow input such as 2 4 to select dice 2 and 4
 				spl = result.split(" ")
@@ -55,12 +56,54 @@ def go():
 					spl[i] = int(spl[i])
 			#else statement to program npc
 			else:
-				category = scoring.best_category(lst)
+				category = scoring.best_category(current_roll)
 				name = category.__name__
+				print(items)
+				second_roll = []
 				if name == "yahtzee":
 					print("The computer got a Yahtzee!")
-					print("Their score this turn is 50!")
+					turn_score = category(current_roll)
+					break
+				elif name == "lgst":
+					print("The computer got a Large Straight.")
+					turn_score = category(current_roll)
+					break
+				elif name == "smst":
+					print("The computer got a Small Straight.")
+					turn_score = category(current_roll)
+					break
+				elif name == "fh":
+					print("The computer got a Full House.")
+					turn_score = category(current_roll)
+					break
+				elif name == "fourK":
+					print("The computer got a Four-of-a-Kind.")
+					turn_score = category(current_roll)
+					break
+				elif name == "threeK":
+					print("The comuter got a Three-of-a-Kind.")
+					turn_score = category(current_roll)
+					break
+				elif name == "ones":
+					num = current_roll.count(1)
+					
+				elif name == "twos":
+					num = current_roll.count(2)
+		
+				elif name == "threes":
+					num = current_roll.count(3)
 						
+				elif name == "fours":
+					num = current_roll.count(4)
+							
+				elif name == "fives":
+					num = current_roll.count(5)
+								
+				elif name == "sixs":
+					num = current_roll.count(6)
+					
+					
+				
 			
 			if len(items)-1 in spl:
 				#Done
@@ -79,7 +122,8 @@ def go():
 				saved_dice.append(current_roll[item])
 			current_roll = roll(5-len(saved_dice))
 			num_rolls += 1
-		turn_score = scoring.usr_scores(saved_dice)
+		if not is_npc(current_player):
+			turn_score = scoring.usr_scores(saved_dice)
 		scores[current_player] += turn_score
 		print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
 		#cycle order
@@ -93,6 +137,7 @@ def go():
 
 if __name__ == "__main__":
 	print("Welcome to Yahtzee")
+	print(" ")
 	npcs = input("How many NPC's would you like?")
 	if not npcs or not npcs.isnumeric():
 		print("Invalid input")
