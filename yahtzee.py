@@ -55,7 +55,9 @@ def go():
 					spl[i] = int(spl[i])
 				#else statement to program npc
 				else:
-					
+					category = best_category(lst)
+					name = category.__name__
+					if name == "yahtzee":					
 			
 			if len(items)-1 in spl:
 				#Done

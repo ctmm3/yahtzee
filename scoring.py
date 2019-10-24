@@ -269,11 +269,8 @@ def yahtzee(lst):
 		return 50
 	else:
 		return 0
+		
 
-def choose(lst):
-	category = bestcatergory(lst)
-	name = category.__name__
-	
 
 
 #tuple containing mapping of possible score categories to their corresponding functions
