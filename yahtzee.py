@@ -82,6 +82,10 @@ def go():
 					print("The computer got a Large Straight.")
 					turn_score = category(current_roll)
 					break
+				elif name == "chance":
+					print("The computer chose Chance.")
+					turn_score = category(current_roll)
+					break				
 				elif name == "smst":
 					print("The computer got a Small Straight.")
 					turn_score = category(current_roll)
@@ -100,21 +104,16 @@ def go():
 					break
 				elif name == "ones":
 					num = 1
-					
 				elif name == "twos":
 					num = 2
 				elif name == "threes":
-					num = 3
-						
+					num = 3	
 				elif name == "fours":
-					num = 4
-							
+					num = 4		
 				elif name == "fives":
-					num = 5
-								
+					num = 5			
 				elif name == "sixs":
 					num = 6
-				
 				for item in current_roll:
 					if item == num:
 						saved_dice.append(item)
