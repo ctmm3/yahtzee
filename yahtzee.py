@@ -54,12 +54,26 @@ def go():
 				#Convert each item in list to an int for simplified processing
 				for i in range(len(spl)):
 					spl[i] = int(spl[i])
+				if len(items)-1 in spl:
+					#Done
+					print("done")
+					break
+				elif len(items)-2 in spl:
+					#Re-roll
+					if num_rolls == 3:
+						print("You can't re-roll any more")
+					else:
+						print("re-rolling")
+						current_roll = roll(5-len(saved_dice))
+						num_rolls += 1
+						continue
+				for item in spl:
+					saved_dice.append(current_roll[item])
 			#else statement to program npc
 			else:
 				category = scoring.best_category(current_roll)
 				name = category.__name__
 				print(items)
-				second_roll = []
 				if name == "yahtzee":
 					print("The computer got a Yahtzee!")
 					turn_score = category(current_roll)
@@ -81,45 +95,29 @@ def go():
 					turn_score = category(current_roll)
 					break
 				elif name == "threeK":
-					print("The comuter got a Three-of-a-Kind.")
+					print("The computer got a Three-of-a-Kind.")
 					turn_score = category(current_roll)
 					break
 				elif name == "ones":
-					num = current_roll.count(1)
+					num = 1
 					
 				elif name == "twos":
-					num = current_roll.count(2)
-		
+					num = 2
 				elif name == "threes":
-					num = current_roll.count(3)
+					num = 3
 						
 				elif name == "fours":
-					num = current_roll.count(4)
+					num = 4
 							
 				elif name == "fives":
-					num = current_roll.count(5)
+					num = 5
 								
 				elif name == "sixs":
-					num = current_roll.count(6)
-					
-					
+					num = 6
 				
-			
-			if len(items)-1 in spl:
-				#Done
-				print("done")
-				break
-			elif len(items)-2 in spl:
-				#Re-roll
-				if num_rolls == 3:
-					print("You can't re-roll any more")
-				else:
-					print("re-rolling")
-					current_roll = roll(5-len(saved_dice))
-					num_rolls += 1
-					continue
-			for item in spl:
-				saved_dice.append(current_roll[item])
+				for item in current_roll:
+					if item == num:
+						saved_dice.append(item)
 			current_roll = roll(5-len(saved_dice))
 			num_rolls += 1
 		if not is_npc(current_player):
