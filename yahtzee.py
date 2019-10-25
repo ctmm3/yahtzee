@@ -1,3 +1,6 @@
+#todo:
+#usr_scores, present categories in respect to excluded items
+
 #!/usr/bin/python
 # Wednesday, October 16, 2019
 # Carter and Noel
@@ -8,12 +11,13 @@ import random
 
 
 #Globals used throughout the program
+current_player = 0
 # List contains scores of each player. first index is always human, the rest refer to number of NPC's.
 scores = []
 # List contains the order of players. first is always human, the rest refer to number of NPC's.
 order = []
 #List contains a list of lists
-#The child lists are categories, in the form of names, already used by each player and/or NPC
+#The child lists are categories, in the form of indexes of categories, already used by each player and/or NPC
 #Each category can only be used once
 used_categories = []
 
@@ -98,6 +102,19 @@ def remove_all(lst, item):
 			lst.remove(item)
 	return lst
 
+def get_category(name_or_func):
+	"""Returns an index of categories referring to the given category name or function.
+	This should be used to easily and efficiently locate scoring categories.
+	It can convert "fourK" to "Four of a Kind" and viseversa, for example"""
+	for i in range(len(categories)):
+		if categories[i][0].lower() == name_or_func:
+			return i
+		if categories[i][1].__name__ == name_or_func:
+			return i
+		if categories[i][1] == name_or_func:
+			return j
+	return
+
 
 #Functions pertaining to scoring according to yahtzee rules
 
@@ -130,13 +147,11 @@ def best_category(lst):
 		maximum_function = chance # :(
 		return maximum_function
 
-def usr_scores(lst):
+def usr_scores(lst, category_lst):
 	this_turn = 0
-	names = []
-	for i, j in categories:
-		names.append(i)
-	category = menu_choice("How would you like to score these dice?", names)
+	category = menu_choice("How would you like to score these dice?", category_lst)
 	category += 1
+	used_categories[current_player].append(category-1)
 
 	if category == 1:
 		return ones(lst)
@@ -390,6 +405,7 @@ def yahtzee(lst):
 	else:
 		return 0
 		
+
 def get_category(name_or_func):
 	"""Returns an index of categories referring to the given category name or function.
 	This should be used to easily and efficiently locate categories.
@@ -400,8 +416,9 @@ def get_category(name_or_func):
 		if categories[i][1].__name__ == name_or_func:
 			return i
 		if categories[i][1] == name_or_func:
-			return j
+			return i
 	return
+
 
 #tuple containing mapping of possible score categories to their corresponding functions
 categories = (
@@ -421,6 +438,7 @@ categories = (
 )
 
 def go():
+	global current_player
 	"""Main turn logic"""
 	current_player = order[0]
 	print("Let's begin")
@@ -460,6 +478,7 @@ def go():
 					#Re-roll
 					if num_rolls == 3:
 						print("You can't re-roll any more")
+						continue
 					else:
 						print("re-rolling")
 						current_roll = roll(5-len(saved_dice))
@@ -524,7 +543,11 @@ def go():
 			current_roll = roll(5-len(saved_dice))
 			num_rolls += 1
 		if not is_npc(current_player):
-			turn_score = usr_scores(saved_dice)
+			categories_to_show = []
+			for i in range(len(categories)):
+				if get_category(categories[i][1]) not in used_categories[current_player]:
+					categories_to_show.append(categories[i][0])
+			turn_score = usr_scores(saved_dice, categories_to_show)
 		scores[current_player] += turn_score
 		print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
 		#cycle order
@@ -562,4 +585,7 @@ if __name__ == "__main__":
 	print(", ".join([who(i) for i in order]))
 	#Initialize the score list with slots
 	scores = [0] * len(order)
+	#Initialize the used_categories list with slots
+	for i in range(len(order)):
+		used_categories.append([])
 	go()
