@@ -6,6 +6,35 @@
 
 from utils import *
 
+def best_category(lst):
+	#Certain rolls take priority
+	#Example, chance is really a last ditch option
+	if yahtzee(lst):
+		return yahtzee
+	elif lgst(lst):
+		return lgst
+	elif smst(lst):
+		return smst
+	elif fh(lst):
+		return fh
+	elif fourK(lst):
+		return fourK
+	elif threeK(lst):
+		return threeK
+	#The greatest value yielded after iteration
+	#We're really just trying to see which function gives the highest value, maximizing points
+	maximum = 0
+	maximum_function = None
+	for func in (ones, twos, threes, fours, fives, sixs):
+		result = func(lst)
+		if result>maximum:
+			maximum = result
+			maximum_function = func
+	#Hopefully chance won't even need to be used
+	if chance(lst)>maximum:
+		maximum_function = chance # :(
+	return maximum_function
+
 def usr_scores(lst):
 	this_turn = 0
 	names = []

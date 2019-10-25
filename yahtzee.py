@@ -1,11 +1,3 @@
-"""
-We are going to do things.
-Move all logic specific to handling of players into one statement.
-Order all NPC logic below.
-Keep relevant portions.
-Noel codes this part because I don't want to. #TooHard #NotToday
-"""
-
 #!/usr/bin/python
 # Wednesday, October 16, 2019
 # Carter and Noel
