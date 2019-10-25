@@ -18,14 +18,15 @@ X   - As a yahtzee player, I would like the computer to decide who goes first, s
     
 X   - As a yahtzee player, I would like to be able to roll 5 six-sided dice on my turn, so I can begin earning points.
 
-As a yahtzee player, I would like to see the dice I rolled in numerical order, so I can be better able to map out my score.
+X   - As a yahtzee player, I would like to see the dice I rolled in numerical order, so I can be better able to map out 
+      my score.
     
-X   - As a yahtzee player, I would like to be able to select dice to keep before re-rolling, so I can stradegize to 
-      earn the maximum points. 
+X   - As a yahtzee player, I would like to be able to select dice to keep before re-rolling, so I can stradegize to earn 
+      the maximum points. 
     
 X   - As a yahtzee player, I would like to be able to re-roll the dice I don't want two times, so I can get new numbers.
     
-    - As a yahtzee player, I would like to be able to complete my turn before using all three rolls if I want to, so I 
+X   - As a yahtzee player, I would like to be able to complete my turn before using all three rolls if I want to, so I 
       can keep all five dice earlier.
     
 X   - As a yahtzee player, I would like to be able to see where I can score, so I can decide how to get my points. 
@@ -34,14 +35,18 @@ X   - As a yahtzee player, I would like to be able to decide where I want my poi
       many points I'll get, so my score stays accurate.
 
     - As a yahtzee player, I would like a score option to be removed from my possible selections after I  have chosen it, 
-      so that I can't score the same thing again. 
+    so that I can't score the same thing again. 
 
-    - As a yahtzee player, I would like the computer to be able to take a turn without my input, so they can play.
+X   - As a yahtzee player, I would like the computer to be able to roll the dice, so they can take their turn.
     
-    - As a yahtzee player, I would like to be able to watch the computer's turn, so I know what happened ( and can trust the score ).
+    - As a yahtzee player, I would like the computer to decide on and determine it's own score, so it doesn't require my 
+    input. 
     
-    - As a yahtzee player, I would like to be able to see my score compared to the computer's score after every turn, so I know 
-      who's winning. 
+    - As a yahtzee player, I would like to be able to watch the computer's turn, so I know what happened 
+    ( and can trust the score ).
+    
+    - As a yahtzee player, I would like to be able to see my score compared to the computer's score after every turn, so I 
+    know who's winning. 
     
 """
 
