@@ -39,10 +39,10 @@ X   - As a yahtzee player, I would like to be able to decide where I want my poi
 
 X   - As a yahtzee player, I would like the computer to be able to roll the dice, so they can take their turn.
     
-    - As a yahtzee player, I would like the computer to decide on and determine it's own score, so it doesn't require my 
+X   - As a yahtzee player, I would like the computer to decide on and determine it's own score, so it doesn't require my 
     input. 
     
-    - As a yahtzee player, I would like to be able to watch the computer's turn, so I know what happened 
+X    - As a yahtzee player, I would like to be able to watch the computer's turn, so I know what happened 
     ( and can trust the score ).
     
     - As a yahtzee player, I would like to be able to see my score compared to the computer's score after every turn, so I 

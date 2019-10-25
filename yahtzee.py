@@ -135,6 +135,7 @@ def usr_scores(lst):
 	names = []
 	for i, j in categories:
 		names.append(i)
+	
 	category = menu_choice("How would you like to score these dice?", names)
 	category += 1
 
@@ -292,7 +293,7 @@ def fh(lst):
 			return 25
 		elif lst.count(1) == 2:
 			return 25
-		elif lst.countt(4) == 2:
+		elif lst.count(4) == 2:
 			return 25
 		elif lst.count(5) == 2:
 			return 25
@@ -534,6 +535,7 @@ def go():
 			current_player = order[0]
 		else:
 			current_player = order[index+1]
+
 
 if __name__ == "__main__":
 	print("Welcome to Yahtzee")
