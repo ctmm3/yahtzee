@@ -128,7 +128,7 @@ def best_category(lst):
 	#Hopefully chance won't even need to be used
 	if chance(lst)>maximum:
 		maximum_function = chance # :(
-	return maximum_function
+		return maximum_function
 
 def usr_scores(lst):
 	this_turn = 0
@@ -337,7 +337,6 @@ def fh(lst):
 	else:
 		return 0
 
-
 def smst(lst):
 	counter1 = 1
 	while counter1 < 4:
@@ -351,7 +350,6 @@ def smst(lst):
 		else:
 			counter1 += 1
 	return 0
-
 
 def lgst(lst):
 	if (
@@ -373,10 +371,8 @@ def lgst(lst):
 	else:
 		return 0
 
-
 def chance(lst):
 	return sum(lst)
-
 
 def yahtzee(lst):
 	if lst.count(1) == 5:
@@ -394,8 +390,6 @@ def yahtzee(lst):
 	else:
 		return 0
 		
-
-
 def get_category(name_or_func):
 	"""Returns an index of categories referring to the given category name or function.
 	This should be used to easily and efficiently locate categories.
@@ -408,7 +402,6 @@ def get_category(name_or_func):
 		if categories[i][1] == name_or_func:
 			return j
 	return
-
 
 #tuple containing mapping of possible score categories to their corresponding functions
 categories = (
@@ -426,7 +419,6 @@ categories = (
 	("Chance", chance),
 	("Yahtzee!", yahtzee)
 )
-
 
 def go():
 	"""Main turn logic"""
@@ -510,16 +502,22 @@ def go():
 					break
 				elif name == "ones":
 					num = 1
+					turn_score = category(current_roll)
 				elif name == "twos":
 					num = 2
+					turn_score = category(current_roll)
 				elif name == "threes":
 					num = 3	
+					turn_score = category(current_roll)
 				elif name == "fours":
-					num = 4		
+					num = 4	
+					turn_score = category(current_roll)
 				elif name == "fives":
-					num = 5			
+					num = 5	
+					turn_score = category(current_roll)
 				elif name == "sixs":
 					num = 6
+					turn_score = category(current_roll)
 				for item in current_roll:
 					if item == num:
 						saved_dice.append(item)
@@ -536,7 +534,6 @@ def go():
 			current_player = order[0]
 		else:
 			current_player = order[index+1]
-
 
 if __name__ == "__main__":
 	print("Welcome to Yahtzee")
