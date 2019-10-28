@@ -1,5 +1,5 @@
 #todo:
-#usr_scores, present categories in respect to excluded items
+	#usr_scores, present categories in respect to excluded items
 
 #!/usr/bin/python
 # Wednesday, October 16, 2019
@@ -97,6 +97,7 @@ def is_npc(current_player):
 	return current_player!=0
 
 def remove_all(lst, item):
+	"""Removes every entry in list matching item"""
 	for i in list(lst):
 		if i == item:
 			lst.remove(item)
@@ -119,6 +120,9 @@ def get_category(name_or_func):
 #Functions pertaining to scoring according to yahtzee rules
 
 def best_category(lst):
+	"""Given a list of dice, returns the best yahtzee scoring category.
+	This is only used for NPC's.
+	"""
 	#Certain rolls take priority
 	#Example, chance is really a last ditch option
 	if yahtzee(lst):
@@ -148,6 +152,9 @@ def best_category(lst):
 		return maximum_function
 
 def usr_scores(lst, category_lst):
+	"""Handles choosing of categories by the user.
+	This includes displaying a menu and calculating score as it pertains to the user's selection.
+	"""
 	this_turn = 0
 	category = menu_choice("How would you like to score these dice?", category_lst)
 	category += 1
@@ -193,7 +200,8 @@ def usr_scores(lst, category_lst):
 
 
 # ----------- Processing their score selection! ---------------------
-
+#these are self explanitory
+#Pass a list (lst) containing values of dice and get score returned as an int
 
 def ones(lst):
 	this_turn = 0
@@ -438,20 +446,22 @@ categories = (
 )
 
 def go():
-	global current_player
 	"""Main turn logic"""
+	global current_player
 	current_player = order[0]
 	print("Let's begin")
 	while True:
-		w = who(current_player)
+		#Are we dealing with an NPC or player?
+		player = who(current_player)
 		# You roll or they roll?
 		if not is_npc(current_player):
 			pronoun = "you"
 			print("It's your turn")
 		else:
 			pronoun = "they"
-			print("It's "+w+"'s turn")
+			print("It's "+player+"'s turn")
 		current_roll = roll(5)
+		current_roll.sort()
 		saved_dice = []
 		num_rolls = 1
 		turn_score = 0
