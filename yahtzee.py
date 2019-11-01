@@ -123,29 +123,32 @@ def best_category(lst, categories_lst):
 	"""
 	#Certain rolls take priority
 	#Example, chance is really a last ditch option
-	if yahtzee(lst) and not "yahtzee" in categories_lst:
+	if yahtzee(lst) and "yahtzee" in categories_lst:
 		return yahtzee
-	elif lgst(lst) and not "Large Straight" in categories_lst:
+	elif lgst(lst) and "Large Straight" in categories_lst:
 		return lgst
-	elif smst(lst) and not "Small Straight" in categories_lst:
+	elif smst(lst) and "Small Straight" in categories_lst:
 		return smst
-	elif fh(lst) and not "Full House" in categories_lst:
+	elif fh(lst) and "Full House" in categories_lst:
 		return fh
-	elif fourK(lst) and not "Four of a Kind" in categories_lst:
+	elif fourK(lst) and "Four of a Kind" in categories_lst:
 		return fourK
-	elif threeK(lst) and not "Three of a Kind":
+	elif threeK(lst) and "Three of a Kind":
 		return threeK
 	#The greatest value yielded after iteration
 	#We're really just trying to see which function gives the highest value, maximizing points
 	maximum = 0
 	maximum_function = None
 	for func in (ones, twos, threes, fours, fives, sixs):
+		print(categories[get_category(func)][0])
+		if not categories[get_category(func)][0] in categories_lst:
+			continue
 		result = func(lst)
-		if result>maximum and not categories[get_category(func)][0] in categories_lst:
+		if result>maximum:
 			maximum = result
 			maximum_function = func
 	#Hopefully chance won't even need to be used
-	if chance(lst)>maximum:
+	if chance(lst)>maximum and "Chance" in categories_lst:
 		maximum_function = chance # :(
 	return maximum_function
 
