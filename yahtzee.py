@@ -17,7 +17,7 @@ scores = []
 # List contains the order of players. first is always human, the rest refer to number of NPC's.
 order = []
 #List contains a list of lists
-#The child lists are categories, in the form of indexes of categories, already used by each player and/or NPC
+#The child lists are categories, in the form of names, already used by each player and/or NPC
 #Each category can only be used once
 used_categories = []
 
@@ -108,34 +108,33 @@ def get_category(name_or_func):
 	This should be used to easily and efficiently locate scoring categories.
 	It can convert "fourK" to "Four of a Kind" and viseversa, for example"""
 	for i in range(len(categories)):
-		if categories[i][0].lower() == name_or_func:
+		if categories[i][0] == name_or_func:
 			return i
 		if categories[i][1].__name__ == name_or_func:
 			return i
 		if categories[i][1] == name_or_func:
-			return j
-	return
+			return i
 
 
 #Functions pertaining to scoring according to yahtzee rules
 
-def best_category(lst):
+def best_category(lst, categories_lst):
 	"""Given a list of dice, returns the best yahtzee scoring category.
 	This is only used for NPC's.
 	"""
 	#Certain rolls take priority
 	#Example, chance is really a last ditch option
-	if yahtzee(lst):
+	if yahtzee(lst) and not "yahtzee" in categories_lst:
 		return yahtzee
-	elif lgst(lst):
+	elif lgst(lst) and not "Large Straight" in categories_lst:
 		return lgst
-	elif smst(lst):
+	elif smst(lst) and not "Small Straight" in categories_lst:
 		return smst
-	elif fh(lst):
+	elif fh(lst) and not "Full House" in categories_lst:
 		return fh
-	elif fourK(lst):
+	elif fourK(lst) and not "Four of a Kind" in categories_lst:
 		return fourK
-	elif threeK(lst):
+	elif threeK(lst) and not "Three of a Kind":
 		return threeK
 	#The greatest value yielded after iteration
 	#We're really just trying to see which function gives the highest value, maximizing points
@@ -143,13 +142,13 @@ def best_category(lst):
 	maximum_function = None
 	for func in (ones, twos, threes, fours, fives, sixs):
 		result = func(lst)
-		if result>maximum:
+		if result>maximum and not categories[get_category(func)][0] in categories_lst:
 			maximum = result
 			maximum_function = func
 	#Hopefully chance won't even need to be used
 	if chance(lst)>maximum:
 		maximum_function = chance # :(
-		return maximum_function
+	return maximum_function
 
 def usr_scores(lst, category_lst):
 	"""Handles choosing of categories by the user.
@@ -158,45 +157,9 @@ def usr_scores(lst, category_lst):
 	this_turn = 0
 	category = menu_choice("How would you like to score these dice?", category_lst)
 	category += 1
-	used_categories[current_player].append(category-1)
-
-	if category == 1:
-		return ones(lst)
-
-	elif category == 2:
-		return twos(lst)
-
-	elif category == 3:
-		return threes(lst)
-
-	elif category == 4:
-		return fours(lst)
-	elif category == 5:
-		return fives(lst)
-
-	elif category == 6:
-		return sixs(lst)
-
-	elif category == 7:
-		return threeK(lst)
-
-	elif category == 8:
-		return fourK(lst)
-
-	elif category == 9:
-		return fh(lst)
-
-	elif category == 10:
-		return smst(lst)
-
-	elif category == 11:
-		return lgst(lst)
-
-	elif category == 12:
-		return chance(lst)
-
-	elif category == 13:
-		return yahtzee(lst)
+	index = get_category(category_lst[category-1])
+	used_categories[current_player].append(index)
+	return categories[index][1](lst)
 
 
 # ----------- Processing their score selection! ---------------------
@@ -414,19 +377,6 @@ def yahtzee(lst):
 		return 0
 		
 
-def get_category(name_or_func):
-	"""Returns an index of categories referring to the given category name or function.
-	This should be used to easily and efficiently locate categories.
-	It can convert "fourK" to "Four of a Kind" and viseversa, for example"""
-	for i in range(len(categories)):
-		if categories[i][0].lower() == name_or_func:
-			return i
-		if categories[i][1].__name__ == name_or_func:
-			return i
-		if categories[i][1] == name_or_func:
-			return i
-	return
-
 
 #tuple containing mapping of possible score categories to their corresponding functions
 categories = (
@@ -498,7 +448,12 @@ def go():
 					saved_dice.append(current_roll[item])
 			#else statement to program npc
 			else:
-				category = best_category(current_roll)
+				categories_to_show = []
+				for name, func in categories:
+					if get_category(name) not in used_categories[current_player]:
+						categories_to_show.append(name)
+				category = best_category(current_roll, categories_to_show)
+				used_categories.append(get_category(category))
 				name = category.__name__
 				print(items)
 				if name == "yahtzee":
@@ -554,9 +509,9 @@ def go():
 			num_rolls += 1
 		if not is_npc(current_player):
 			categories_to_show = []
-			for i in range(len(categories)):
-				if get_category(categories[i][1]) not in used_categories[current_player]:
-					categories_to_show.append(categories[i][0])
+			for name, func in categories:
+				if get_category(name) not in used_categories[current_player]:
+					categories_to_show.append(name)
 			turn_score = usr_scores(saved_dice, categories_to_show)
 		scores[current_player] += turn_score
 		print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
