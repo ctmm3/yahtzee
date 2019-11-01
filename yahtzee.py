@@ -9,7 +9,6 @@
 
 import random
 
-
 #Globals used throughout the program
 current_player = 0
 # List contains scores of each player. first index is always human, the rest refer to number of NPC's.
