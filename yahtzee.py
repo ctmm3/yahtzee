@@ -560,6 +560,13 @@ def go():
 			turn_score = usr_scores(saved_dice, categories_to_show)
 		scores[current_player] += turn_score
 		print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
+		print(" ")
+		print("SCORE TOTALS:")
+		print(" ")
+		print("Your score = ", scores[0])
+		for i in range(1, len(scores)):
+			print(who(i),"'s Score = ", scores[i])
+		print(" ")			
 		#cycle order
 		#If we reach the end of our list of players, wrap around
 		index = order.index(current_player)
@@ -567,6 +574,7 @@ def go():
 			current_player = order[0]
 		else:
 			current_player = order[index+1]
+			
 
 
 if __name__ == "__main__":
