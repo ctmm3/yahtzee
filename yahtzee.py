@@ -12,7 +12,7 @@ import pygame as py
 
 py.init() #initializes window
 py.display.set_caption('Yahtzee') #displays window title
-py.display.set_mode((900,600), 0, 32)
+py.display.set_mode((900,600), 0, 8)
 py.image.load('background.gif')
 
 #Globals used throughout the program
