@@ -526,7 +526,7 @@ def go():
 				categories_to_show.append(name)
 		if not is_npc(current_player):
 			
-			if categories_to_show >= 1:
+			if len(categories_to_show) >= 1:
 				turn_score = usr_scores(saved_dice, categories_to_show)
 		scores[current_player] += turn_score
 		print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
@@ -536,7 +536,15 @@ def go():
 		print("Your score = ", scores[0])
 		for i in range(1, len(scores)):
 			print(who(i),"'s Score = ", scores[i])
-		
+		if len(categories_to_show) == 0:
+			if winner() == "you":
+				print('''     You won!!
+			                   Can I get a WOOT WOOT''')
+			else:
+				print(''' Aw, big fat bummer!
+				        The computer won...
+					               better luck next time!''')
+			break
 		print(" ")			
 		#cycle order
 		#If we reach the end of our list of players, wrap around
