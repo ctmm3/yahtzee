@@ -8,6 +8,12 @@
 """An easy-to-play console yahtzee game."""
 
 import random
+import pygame as py
+
+py.init() #initializes window
+py.display.set_caption('Yahtzee') #displays window title
+py.display.set_mode((900,600), 0, 32)
+py.image.load('background.gif')
 
 #Globals used throughout the program
 current_player = 0
