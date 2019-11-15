@@ -516,11 +516,12 @@ def go():
 						saved_dice.append(item)
 			current_roll = roll(5-len(saved_dice))
 			num_rolls += 1
-		if not is_npc(current_player):
 			categories_to_show = []
 			for name, func in categories:
 				if get_category(name) not in used_categories[current_player]:
 					categories_to_show.append(name)
+		if not is_npc(current_player):
+			
 			if categories_to_show >= 1:
 				turn_score = usr_scores(saved_dice, categories_to_show)
 		scores[current_player] += turn_score
