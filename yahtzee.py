@@ -539,7 +539,7 @@ def go():
 		if len(categories_to_show) == 0:
 			if winner() == "you":
 				print('''     You won!!
-			                   Can I get a WOOT WOOT''')
+			                   Can I get a WOOT WOOT!''')
 			else:
 				print(''' Aw, big fat bummer!
 				        The computer won...
