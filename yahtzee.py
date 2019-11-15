@@ -434,11 +434,13 @@ def go():
 					spl[i] = int(spl[i])
 				if len(items)-1 in spl:
 					#Done
-					saved_dice = list(items)
-					#Remove done and reroll from saved_dice
-					saved_dice = saved_dice[:-1]
-					saved_dice = saved_dice[:-1]
-					print("done")
+					#Remove done and reroll from items before conversion
+					items = items[:-1]
+					items = items[:-1]
+					for i in range(len(items)):
+						items[i] = int(items[i])
+					saved_dice += list(items)
+					print("done", saved_dice)
 					break
 				elif len(items)-2 in spl:
 					#Re-roll
