@@ -521,7 +521,8 @@ def go():
 			for name, func in categories:
 				if get_category(name) not in used_categories[current_player]:
 					categories_to_show.append(name)
-			turn_score = usr_scores(saved_dice, categories_to_show)
+			if categories_to_show >= 1:
+				turn_score = usr_scores(saved_dice, categories_to_show)
 		scores[current_player] += turn_score
 		print(str(turn_score)+" "+pluralize("point", turn_score!=1, False))
 		print(" ")
