@@ -71,6 +71,10 @@ def roll(dice):
 	return rolls
 
 
+def winner():
+	"""Returns the name of the player who currently holds the highest score"""
+	return who(scores.index(max(scores)))
+
 def who(i):
 	"""Returns the name of an NPC if i>0, otherwise you"""
 	if i == 0:
@@ -516,10 +520,10 @@ def go():
 						saved_dice.append(item)
 			current_roll = roll(5-len(saved_dice))
 			num_rolls += 1
-			categories_to_show = []
-			for name, func in categories:
-				if get_category(name) not in used_categories[current_player]:
-					categories_to_show.append(name)
+		categories_to_show = []
+		for name, func in categories:
+			if get_category(name) not in used_categories[current_player]:
+				categories_to_show.append(name)
 		if not is_npc(current_player):
 			
 			if categories_to_show >= 1:
@@ -532,6 +536,7 @@ def go():
 		print("Your score = ", scores[0])
 		for i in range(1, len(scores)):
 			print(who(i),"'s Score = ", scores[i])
+		
 		print(" ")			
 		#cycle order
 		#If we reach the end of our list of players, wrap around
