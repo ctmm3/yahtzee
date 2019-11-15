@@ -434,6 +434,10 @@ def go():
 					spl[i] = int(spl[i])
 				if len(items)-1 in spl:
 					#Done
+					saved_dice = list(items)
+					#Remove done and reroll from saved_dice
+					saved_dice = saved_dice[:-1]
+					saved_dice = saved_dice[:-1]
 					print("done")
 					break
 				elif len(items)-2 in spl:
@@ -453,6 +457,7 @@ def go():
 				categories_to_show = []
 				for name, func in categories:
 					if get_category(name) not in used_categories[current_player]:
+						print(name)
 						categories_to_show.append(name)
 				category = best_category(current_roll, categories_to_show)
 				used_categories.append(get_category(category))
