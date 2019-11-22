@@ -4,7 +4,8 @@
 
 '''constructing a GUI for the Yahtzee game'''
 
-import yahtzee
+import globals as g
+from functions import *
 import pygame as py
 
 s_width = 1000
